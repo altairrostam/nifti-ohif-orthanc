@@ -3,10 +3,7 @@ window.config = {
   routerBasename: '/',
   extensions: [],
   modes: [],
-  customizationService: {
-    dicomUploadComponent:
-      '@ohif/extension-cornerstone.customizationModule.cornerstoneDicomUploadComponent',
-  },
+  customizationService: {},
   showStudyList: true,
   maxNumberOfWebWorkers: 3,
   showLoadingIndicator: true,
@@ -20,11 +17,11 @@ window.config = {
       namespace: '@ohif/extension-default.dataSourcesModule.dicomweb',
       sourceName: 'orthanc',
       configuration: {
-        friendlyName: 'local Orthanc DICOMWeb Server',
-        name: 'DCM4CHEE',
-        wadoUriRoot: 'http://localhost/dicom-web',
-        qidoRoot: 'http://localhost/dicom-web',
-        wadoRoot: 'http://localhost/dicom-web',
+        friendlyName: 'NIFTI-OHIF',
+        name: 'NIFTI-OHIF',
+        wadoUriRoot: "http://localhost:8080/wado",
+        qidoRoot: "http://localhost:8080/dicom-web",
+        wadoRoot: "http://localhost:8080/dicom-web",
         qidoSupportsIncludeField: true,
         supportsReject: true,
         imageRendering: 'wadors',

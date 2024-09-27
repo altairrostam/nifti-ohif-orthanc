@@ -12,6 +12,8 @@ import { useAppConfig } from '@state';
 import { useDebounce, useSearchParams } from '@hooks';
 import { utils, hotkeys } from '@ohif/core';
 
+import NiftiUploader from './NiftiUploader';
+
 import {
   Icon,
   StudyListExpandedRow,
@@ -496,31 +498,20 @@ function WorkList({
   }
 
   const { customizationService } = servicesManager.services;
-  const { component: dicomUploadComponent } =
-    customizationService.get('dicomUploadComponent') ?? {};
-  const uploadProps =
-    dicomUploadComponent && dataSource.getConfig()?.dicomUploadEnabled
-      ? {
-          title: 'Upload files',
-          closeButton: true,
-          shouldCloseOnEsc: false,
-          shouldCloseOnOverlayClick: false,
-          content: dicomUploadComponent.bind(null, {
-            dataSource,
-            onComplete: () => {
-              hide();
-              onRefresh();
-            },
-            onStarted: () => {
-              show({
-                ...uploadProps,
-                // when upload starts, hide the default close button as closing the dialogue must be handled by the upload dialogue itself
-                closeButton: false,
-              });
-            },
-          }),
-        }
-      : undefined;
+  const uploadProps =  {
+    title: 'Upload Nifti',
+    closeButton: true,
+    shouldCloseOnEsc: false,
+    shouldCloseOnOverlayClick: false,
+    content: () => (
+      <NiftiUploader
+        onUploadComplete={() => {
+          hide();
+          onRefresh();
+        }}
+      />
+    ),
+  }
 
   const { component: dataSourceConfigurationComponent } =
     customizationService.get('ohif.dataSourceConfigurationComponent') ?? {};
