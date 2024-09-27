@@ -124,6 +124,7 @@ function WorkList({
   }
 
   // ~ Rows & Studies
+  const [selectedStudies, setSelectedStudies] = useState([]);
   const [expandedRows, setExpandedRows] = useState([]);
   const [studiesWithSeriesData, setStudiesWithSeriesData] = useState([]);
   const numOfStudies = studiesTotal;
@@ -538,6 +539,7 @@ function WorkList({
           getDataSourceConfigurationComponent={
             dataSourceConfigurationComponent ? () => dataSourceConfigurationComponent() : undefined
           }
+          selectedStudies={selectedStudies}
         />
         {hasStudies ? (
           <div className="flex grow flex-col">
@@ -546,6 +548,7 @@ function WorkList({
               numOfStudies={numOfStudies}
               querying={querying}
               filtersMeta={filtersMeta}
+              onStudiesSelected={setSelectedStudies}
             />
             <div className="grow">
               <StudyListPagination

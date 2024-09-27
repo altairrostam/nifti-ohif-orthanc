@@ -16,8 +16,11 @@ const StudyListFilter = ({
   numOfStudies,
   onUploadClick,
   getDataSourceConfigurationComponent,
+  selectedStudies,
 }) => {
+  console.log('selectedStudies', selectedStudies);
   const { t } = useTranslation('StudyList');
+
   const { sortBy, sortDirection } = filterValues;
   const filterSorting = { sortBy, sortDirection };
   const setFilterSorting = sortingValues => {
@@ -27,6 +30,13 @@ const StudyListFilter = ({
     });
   };
   const isSortingEnabled = numOfStudies > 0 && numOfStudies <= 100;
+
+  const handleCompareClick = () => {
+    if (selectedStudies.length > 1) {
+      const studyInstanceUIDs = selectedStudies.join(',');
+      window.location.href = `/viewer?StudyInstanceUIDs=${studyInstanceUIDs}&hangingprotocolId=@ohif/hpCompare`;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -51,9 +61,15 @@ const StudyListFilter = ({
                     <span>{t('Upload')}</span>
                   </div>
                 )}
+                <LegacyButton
+                  className="text-primary-active"
+                  onClick={handleCompareClick}
+                  disabled={selectedStudies.length <= 1}
+                >
+                  {t('Compare')} ({selectedStudies.length})
+                </LegacyButton>
               </div>
               <div className="flex h-[34px] flex-row items-center">
-                {/* TODO revisit the completely rounded style of button used for clearing the study list filter - for now use LegacyButton*/}
                 {isFiltering && (
                   <LegacyButton
                     rounded="full"
@@ -71,7 +87,7 @@ const StudyListFilter = ({
                   variant="h6"
                   className="text-primary-light"
                 >
-                  {`${t('Number of studies')}: `}
+                  {`${t('Number of studies')}: `}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -109,33 +125,15 @@ const StudyListFilter = ({
 };
 
 StudyListFilter.propTypes = {
-  filtersMeta: PropTypes.arrayOf(
-    PropTypes.shape({
-      /** Identifier used to map a field to it's value in `filterValues` */
-      name: PropTypes.string.isRequired,
-      /** Friendly label for filter field */
-      displayName: PropTypes.string.isRequired,
-      /** One of the supported filter field input types */
-      inputType: PropTypes.oneOf(['Text', 'MultiSelect', 'DateRange', 'None']).isRequired,
-      isSortable: PropTypes.bool.isRequired,
-      /** Size of filter field in a 12-grid system */
-      gridCol: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]).isRequired,
-      /** Options for a "MultiSelect" inputType */
-      option: PropTypes.arrayOf(
-        PropTypes.shape({
-          value: PropTypes.string,
-          label: PropTypes.string,
-        })
-      ),
-    })
-  ).isRequired,
+  filtersMeta: PropTypes.arrayOf(PropTypes.object).isRequired,
   filterValues: PropTypes.object.isRequired,
-  numOfStudies: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   clearFilters: PropTypes.func.isRequired,
   isFiltering: PropTypes.bool.isRequired,
+  numOfStudies: PropTypes.number.isRequired,
   onUploadClick: PropTypes.func,
   getDataSourceConfigurationComponent: PropTypes.func,
+  selectedStudies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default StudyListFilter;
