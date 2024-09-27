@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "mikestead.dotenv",
+    "bungcip.better-toml",
+    "silvenon.mdx",
+    "gruntfuggly.todo-tree",
+    "wayou.vscode-todo-highlight",
+    "bradlc.vscode-tailwindcss"
+  ]
+}
