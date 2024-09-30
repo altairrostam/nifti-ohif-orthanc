@@ -6,7 +6,7 @@ from pydicom.dataset import Dataset, FileMetaDataset
 from pydicom.uid import generate_uid, ExplicitVRLittleEndian
 
 def upload_dicom_to_orthanc(dicom_file):
-    orthanc_url = "http://localhost:8080/instances"
+    orthanc_url = "http://orthanc:8042/instances"
     with open(dicom_file, 'rb') as f:
         dicom_content = f.read()
     

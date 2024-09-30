@@ -1,3 +1,7 @@
 fastapi
+uvicorn
+httplib2
+SimpleITK
 pydicom
-simpleITK
+python-multipart
+numpy

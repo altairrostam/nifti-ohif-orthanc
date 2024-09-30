@@ -35,3 +35,4 @@ dockerfile
 coverage/
 docs/
 testdata/
+yarn-error.log

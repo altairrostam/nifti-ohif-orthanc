@@ -22,7 +22,7 @@ const NiftiUploader = ({ onUploadComplete }) => {
 
     try {
       // Replace with your API endpoint
-      const response = await fetch('http://localhost:8000/upload', {
+      const response = await fetch('http://localhost:8000/api/upload', {
         method: 'POST',
         body: formData,
       });

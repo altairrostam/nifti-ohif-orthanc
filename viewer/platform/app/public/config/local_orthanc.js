@@ -19,9 +19,9 @@ window.config = {
       configuration: {
         friendlyName: 'NIFTI-OHIF',
         name: 'NIFTI-OHIF',
-        wadoUriRoot: "http://localhost:8080/wado",
-        qidoRoot: "http://localhost:8080/dicom-web",
-        wadoRoot: "http://localhost:8080/dicom-web",
+        wadoUriRoot: "http://localhost/wado",
+        qidoRoot: "http://localhost/dicom-web",
+        wadoRoot: "http://localhost/dicom-web",
         qidoSupportsIncludeField: true,
         supportsReject: true,
         imageRendering: 'wadors',

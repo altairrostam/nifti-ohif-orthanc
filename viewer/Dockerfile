@@ -56,7 +56,9 @@ RUN yarn install --frozen-lockfile --verbose
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 ENV QUICK_BUILD true
 # ENV GENERATE_SOURCEMAP=false
-# ENV REACT_APP_CONFIG=config/default.js
+ENV APP_CONFIG=config/local_orthanc.js
+ENV PUBLIC_URL=/viewer/
+ENV USE_HASH_ROUTER=false
 
 RUN yarn run build
 

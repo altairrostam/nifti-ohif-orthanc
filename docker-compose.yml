@@ -1,0 +1,52 @@
+services:
+  orthanc:
+    image: jodogne/orthanc-plugins
+    hostname: orthanc
+    container_name: orthancPACS
+    volumes:
+      - ./api/orthanc.json:/etc/orthanc/orthanc.json:ro
+    networks:
+      - orthanc_network
+
+  fastapi:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: fastapi_app
+    volumes:
+      - ./api:/app
+    environment:
+      - ORTHANC_URL=http://orthanc:8042
+    ports:
+      - "8000:8000"
+    networks:
+      - orthanc_network
+
+  viewer:
+    build:
+      context: ./viewer
+      dockerfile: Dockerfile
+    container_name: ohif_viewer
+    ports:
+      - "3000:80"
+    networks:
+      - orthanc_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: orthanc_nginx
+    volumes:
+      - ./api/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./logs/nginx:/var/log/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - orthanc
+      - fastapi
+      - viewer
+    networks:
+      - orthanc_network
+
+networks:
+  orthanc_network:
+    driver: bridge
