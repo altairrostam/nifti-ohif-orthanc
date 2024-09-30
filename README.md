@@ -77,9 +77,17 @@ This project provides a solution for converting NIFTI files to DICOM format, sto
 
 1. Use the OHIF Viewer to view and upload the stored images.
    - The converted DICOM files are automatically stored in Orthanc.
-   ![Upload NIFTI images](/media/demo-1.mp4)
+
+
+https://github.com/user-attachments/assets/f91ed644-7db7-49e6-8137-1178dab9772d
+
+
 2. After the images are uploaded, you can select the studies to compare.
-   ![Compare studies](/media/demo-2.mp4)
+
+
+https://github.com/user-attachments/assets/78979265-39a1-4721-8bbf-465504008a52
+
+
 
 ## Configuration
 
