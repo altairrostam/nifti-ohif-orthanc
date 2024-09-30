@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import shutil
 import os
 
-from utils import convert_nifti_to_dicom, upload_dicom_to_orthanc
+from .utils import convert_nifti_to_dicom, upload_dicom_to_orthanc
 
 
 app = FastAPI(root_path="/api")
